@@ -80,7 +80,7 @@ class LockableCover(CoverEntity):
         self._attr_unique_id = f"cover_lock_{object_id}"
         self._device_class_override = cfg.get(CONF_DEVICE_CLASS)
         # Force the entity_id from the config slug so it is predictable
-        # (e.g. "buro_lockable" -> cover.buro_lockable) instead of being
+        # (e.g. "office_lockable" -> cover.office_lockable) instead of being
         # derived from the friendly name (which would collide with the source).
         self.entity_id = f"cover.{object_id}"
 
