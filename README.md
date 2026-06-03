@@ -1,4 +1,4 @@
-# Cover Lock
+# Lockable Cover
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 
@@ -24,7 +24,7 @@ what enforces the lock at the backend level.
 1. In Home Assistant go to **HACS → ⋮ → Custom repositories**.
 2. Add `https://github.com/neffez/lockable-cover` with category
    **Integration**.
-3. Install **Cover Lock**.
+3. Install **Lockable Cover**.
 4. **Restart** Home Assistant (a full restart is required for a new platform —
    a reload is not enough).
 
