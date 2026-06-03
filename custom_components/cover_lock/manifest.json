@@ -1,6 +1,6 @@
 {
   "domain": "cover_lock",
-  "name": "Cover Lock",
+  "name": "Lockable Cover",
   "codeowners": ["@neffez"],
   "dependencies": [],
   "documentation": "https://github.com/neffez/lockable-cover",
