@@ -13,7 +13,7 @@ cover:
       office:
         name: "Office"
         cover_entity: cover.office
-        lock_entity: switch.office_beschattung_sperren
+        lock_entity: switch.office_lock
 """
 
 DOMAIN = "cover_lock"

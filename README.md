@@ -42,8 +42,8 @@ cover:
     covers:
       office_lockable:
         name: "Office"
-        cover_entity: cover.office_rollladen
-        lock_entity: switch.office_beschattung_sperren   # switch / input_boolean / lock
+        cover_entity: cover.office_blind
+        lock_entity: switch.office_lock   # switch / input_boolean / lock
         invert: true   # optional: lock entity is ON when *unlocked*
 ```
 
