@@ -1,5 +1,5 @@
 {
-  "domain": "cover_lock",
+  "domain": "lockable_cover",
   "name": "Lockable Cover",
   "codeowners": ["@neffez"],
   "dependencies": [],

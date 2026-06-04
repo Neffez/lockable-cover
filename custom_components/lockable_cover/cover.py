@@ -1,4 +1,4 @@
-"""Lockable cover platform for the Cover Lock integration."""
+"""Lockable cover platform for the Lockable Cover integration."""
 
 from __future__ import annotations
 
@@ -77,7 +77,7 @@ class LockableCover(CoverEntity):
         self._lock_entity = cfg[CONF_LOCK_ENTITY]
         self._invert = cfg[CONF_INVERT]
         self._attr_name = cfg.get(CONF_NAME, object_id)
-        self._attr_unique_id = f"cover_lock_{object_id}"
+        self._attr_unique_id = f"lockable_cover_{object_id}"
         self._device_class_override = cfg.get(CONF_DEVICE_CLASS)
         # Force the entity_id from the config slug so it is predictable
         # (e.g. "office_lockable" -> cover.office_lockable) instead of being
@@ -87,7 +87,7 @@ class LockableCover(CoverEntity):
     async def async_added_to_hass(self) -> None:
         if self.hass.states.get(self._cover_entity) is None:
             _LOGGER.warning(
-                "cover_lock '%s': source cover '%s' not found — check the "
+                "lockable_cover '%s': source cover '%s' not found — check the "
                 "entity_id under Developer Tools → States",
                 self.entity_id,
                 self._cover_entity,
