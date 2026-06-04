@@ -6,7 +6,7 @@ A small Home Assistant **custom integration** that adds a **lock** to a cover.
 
 ## What it does
 
-`cover_lock` creates a proxy cover entity that mirrors an existing cover
+`lockable_cover` creates a proxy cover entity that mirrors an existing cover
 (state, position, tilt, supported features) but **blocks all movement commands
 while a lock entity is `on`** — no matter the source (UI, automation, app,
 voice). `stop` is always allowed as a safety measure.
@@ -30,7 +30,7 @@ what enforces the lock at the backend level.
 
 ### Manual
 
-Copy the `custom_components/cover_lock` folder into your Home Assistant
+Copy the `custom_components/lockable_cover` folder into your Home Assistant
 `config/custom_components/` directory and restart.
 
 ## Configuration (YAML)
@@ -38,7 +38,7 @@ Copy the `custom_components/cover_lock` folder into your Home Assistant
 ```yaml
 # configuration.yaml
 cover:
-  - platform: cover_lock
+  - platform: lockable_cover
     covers:
       office_lockable:
         name: "Office"
