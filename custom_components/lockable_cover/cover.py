@@ -34,6 +34,7 @@ CONF_COVERS = "covers"
 CONF_COVER_ENTITY = "cover_entity"
 CONF_LOCK_ENTITY = "lock_entity"
 CONF_INVERT = "invert"
+CONF_FAIL_SECURE = "fail_secure"
 
 ATTR_LOCKED = "locked"
 ATTR_LOCK_ENTITY = "lock_entity"
@@ -48,6 +49,9 @@ COVER_SCHEMA = vol.Schema(
         # invert: True if the lock entity is ON when *unlocked* (e.g. a KNX
         # release object where 1 = released/free, 0 = locked).
         vol.Optional(CONF_INVERT, default=False): cv.boolean,
+        # fail_secure: when the lock entity is unavailable/unknown, treat the
+        # cover as locked (block movement) instead of allowing it.
+        vol.Optional(CONF_FAIL_SECURE, default=False): cv.boolean,
     }
 )
 
@@ -76,6 +80,7 @@ class LockableCover(CoverEntity):
         self._cover_entity = cfg[CONF_COVER_ENTITY]
         self._lock_entity = cfg[CONF_LOCK_ENTITY]
         self._invert = cfg[CONF_INVERT]
+        self._fail_secure = cfg[CONF_FAIL_SECURE]
         self._attr_name = cfg.get(CONF_NAME, object_id)
         self._attr_unique_id = f"lockable_cover_{object_id}"
         self._device_class_override = cfg.get(CONF_DEVICE_CLASS)
@@ -115,7 +120,9 @@ class LockableCover(CoverEntity):
     def _locked(self) -> bool:
         st = self.hass.states.get(self._lock_entity)
         if st is None or st.state in (STATE_UNAVAILABLE, STATE_UNKNOWN):
-            return False
+            # Lock state can't be determined. fail_secure decides whether that
+            # blocks movement (locked) or allows it (unlocked, the default).
+            return self._fail_secure
         is_on = st.state == STATE_ON
         # When inverted, ON means "released" -> locked is the opposite.
         return (not is_on) if self._invert else is_on

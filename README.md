@@ -7,9 +7,13 @@ A small Home Assistant **custom integration** that adds a **lock** to a cover.
 ## What it does
 
 `lockable_cover` creates a proxy cover entity that mirrors an existing cover
-(state, position, tilt, supported features) but **blocks all movement commands
-while a lock entity is `on`** — no matter the source (UI, automation, app,
-voice). `stop` is always allowed as a safety measure.
+(state, position, tilt, supported features) but **blocks movement commands sent
+to this proxy while a lock entity is `on`** — no matter where the command comes
+from (UI, automation, app, voice). `stop` is always allowed as a safety measure.
+
+> **Scope:** the lock only guards commands targeting the proxy cover. Commands
+> sent directly to the underlying source cover are not intercepted, so point
+> your dashboards and automations at the proxy entity.
 
 It pairs nicely with the companion
 [Lockable Cover Card](https://github.com/neffez/lockable-cover-card), which
@@ -53,6 +57,7 @@ cover:
 | `lock_entity` | yes | The entity used as the lock (switch / input_boolean / lock). |
 | `name` | no | Friendly name for the proxy cover. |
 | `invert` | no | `true` if the lock entity is `on` when *unlocked* (e.g. KNX shading-release group objects). Default `false` (on = locked). |
+| `fail_secure` | no | `true` to treat the cover as locked (block movement) when the lock entity is `unavailable`/`unknown`. Default `false` (movement allowed when the lock state can't be determined). |
 
 The config slug becomes the entity_id, so the example above creates
 `cover.office_lockable` named "Office".
